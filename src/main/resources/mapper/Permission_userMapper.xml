@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inet.drh.mapper.Permission_userMapper">
+    <!--    根据学号查找权限序号-->
+    <select id="findPermission" parameterType="java.lang.String" resultType="java.lang.String">
+        select permissionId from permission_User where id=#{number}
+    </select>
+    <!--    增加学号和权限序号-->
+    <insert id="insertPermissions" parameterType="java.lang.String">
+        insert into permission_user values (#{id},#{permissionId})
+    </insert>
+</mapper>

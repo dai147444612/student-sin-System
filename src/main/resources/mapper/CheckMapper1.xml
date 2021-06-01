@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inet.drh.mapper.CheckMapper">
+    <!--    查找登录信息-->
+    <select id="findById" parameterType="java.lang.String" resultType="com.inet.drh.entity.po.Check">
+        select * from check1 where id=#{id}
+    </select>
+    <!--    新增签到-->
+    <insert id="insertNew" parameterType="com.inet.drh.entity.po.Check">
+        insert into check1 values (#{id},#{userId},#{checkState},#{startTime},#{EndTime},#{account})
+    </insert>
+    <!--    获取签到状态-->
+    <select id="getCheckState" parameterType="java.lang.String" resultType="java.lang.String">
+        select checkState from check1 where id=#{id}
+    </select>
+    <!--    签到功能-->
+    <update id="singin" parameterType="com.inet.drh.entity.po.Check">
+        update check1 set checkState=#{checkState},startTime=#{startTime} where id=#{id};
+    </update>
+    <!--获取签到时长-->
+    <select id="getStartTime" parameterType="java.lang.String" resultType="java.util.Date">
+        select startTime from check1 where id=#{id}
+    </select>
+    <!--    签退功能-->
+    <update id="singOut" parameterType="com.inet.drh.entity.po.Check">
+        update check1 set account=#{account} , checkState=#{checkState} where id=#{id};
+    </update>
+    <!--    查询总登录时长-->
+    <select id="findAccountTime" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select account from check1 where id=#{id}
+    </select>
+
+    <!--    查询分页-->
+    <select id="findPage" parameterType="java.lang.Integer" resultType="com.inet.drh.entity.vo.UserPage">
+        select id,checkState,userId from check1 where checkState=1 limit #{offset},#{page}
+    </select>
+
+    <!--签到操作-->
+    <update id="ManageSin" parameterType="com.inet.drh.entity.po.Check">
+        update check1 set checkState=#{checkState} where id=#{id}
+    </update>
+</mapper>

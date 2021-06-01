@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inet.drh.mapper.UserMapper">
+    <!--    注册用户-->
+    <insert id="registerUser" parameterType="com.inet.drh.entity.po.User">
+        insert into user values
+        (#{id},#{name},#{number},#{phone},#{classes},#{creattime},#{Modified},#{username},#{password})
+    </insert>
+    <!--    修改密码-->
+    <update id="updatePassword" parameterType="com.inet.drh.entity.dto.rePassword">
+        update user set password=#{newPassword} where username=#{username} and password=#{oldPassword} and
+        number=#{number}
+    </update>
+    <!--    查找用户信息-->
+    <select id="findAll" parameterType="com.inet.drh.entity.dto.Login" resultType="com.inet.drh.entity.vo.AllUserInfo">
+        select number,id,phone,classes,name,username from user where username=#{username}
+    </select>
+    <!--    通过账号查找用户信息-->
+    <select id="findAllByUsername" parameterType="java.lang.String" resultType="com.inet.drh.entity.vo.AllUserInfo">
+        select number,id,phone,classes,name,username from user where username=#{username}
+    </select>
+    <select id="findAllByUsername1" parameterType="java.lang.String" resultType="com.inet.drh.entity.po.User">
+        select number,id,phone,classes,name,username from user where username=#{username}
+    </select>
+    <!--    登录-->
+    <select id="login" parameterType="java.lang.String" resultType="java.lang.String">
+        select * from user where username=#{username}and password=#{password}
+    </select>
+    <!--    获取权限-->
+    <select id="getPermissions" parameterType="java.lang.String" resultType="com.inet.drh.entity.po.Permission">
+        select * from permission where id=#{username}
+    </select>
+</mapper>

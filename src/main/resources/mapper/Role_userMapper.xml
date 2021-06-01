@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inet.drh.mapper.Role_userMapper">
+    <!--    根据学号获取角色序号-->
+    <select id="getRole" parameterType="java.lang.String" resultType="java.lang.String">
+        select RoleId from role_user where id=#{id}
+    </select>
+    <!--    增加角色和角色序号-->
+    <insert id="insertRoleId" parameterType="java.lang.String">
+        insert into role_user values (#{id},#{RoleId})
+    </insert>
+
+
+</mapper>
+

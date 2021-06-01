@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inet.drh.mapper.RoleMapper">
+    <!--根据角色序号添加角色，一个人可以有多个角色，故要多行记录，通过角色序号查询多行记录-->
+    <insert id="insertRole" parameterType="java.lang.String">
+        insert into role values (#{roleId},#{roleName})
+    </insert>
+    <!--根据角色序号查询用户角色-->
+    <select id="selectRole" parameterType="java.lang.String" resultType="java.lang.String">
+        select * from role where id=#{roleId}
+    </select>
+</mapper>
